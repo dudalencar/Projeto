@@ -5,11 +5,12 @@ body {
   padding: 0;
   display: flex;
   background-color: #f0f0f0;
+  overflow-x: hidden;
 }
 
 /* SIDEBAR */
 .sidebar {
-  width: 250px;
+  width: 270px;
   background-color: #354982;
   color: white;
   height: 100vh;
@@ -39,8 +40,8 @@ body {
 }
 
 .search-container {
-    width: 100%;
-    margin-bottom: 10px; /* Reduzi a margem para 10px */
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .search-bar {
@@ -52,32 +53,85 @@ body {
 }
 
 nav {
-    width: 100%;
-    /* REMOVA ou COMENTE a linha abaixo */
-    /* margin-top: auto; */
-    margin-top: 10px; /* Adicione um pouco de espaço entre a busca e o menu */
+  width: 100%;
+  margin-top: 10px;
 }
 
 nav ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-nav ul li {
-  padding: 12px;
-  cursor: pointer;
+nav ul li.menu-item > span,
+.menu-title {
   display: flex;
   align-items: center;
-  font-size: 18px; /* Aumentei o tamanho da fonte */
+  font-size: 18px;
+  padding: 12px 10px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+  justify-content: flex-start;
 }
 
-nav ul li i {
+.menu-title {
+  justify-content: space-between;
+}
+
+.has-submenu > span.menu-title {
+  justify-content: space-between;
+}
+
+.menu-title i,
+nav ul li.menu-item > span i {
   margin-right: 8px;
   font-size: 20px;
 }
 
-nav ul li:hover {
-  background-color: #34495e;
+.arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+  margin-left: auto;
+  color: #ccc;
+}
+
+.has-submenu.active .arrow {
+  transform: rotate(180deg);
+  color: white;
+}
+
+.submenu {
+  display: none; /* Garante que o submenu esteja inicialmente oculto */
+  flex-direction: column;
+  padding-left: 20px;
+  margin-top: 5px;
+  animation: fadeIn 0.3s ease-in-out;
+  border-left: 2px solid #4a65a3;
+}
+
+.submenu li {
+  font-size: 16px;
+  padding: 10px 0;
+  color: #e0e0e0;
+  transition: all 0.2s;
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.submenu li:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #2f3e6c;
+  border-radius: 4px;
+}
+
+.has-submenu.active .submenu {
+  display: flex; /* Torna o submenu visível quando a classe 'active' está presente */
 }
 
 /* MAIN CONTENT */
@@ -128,4 +182,10 @@ h2 {
 
 .card:hover {
   background-color: #f9f9f9;
+}
+
+/* Animação do submenu */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
